@@ -1,0 +1,13 @@
+{
+  "input": {
+    "entry": "dist/index.js",
+    "source": "es5"
+  },
+  "output": {
+    "folder": "docs/scripts",
+    "file": "bundle.js",
+    "runtime": "browser",
+    "sourceMap": true
+  },
+  "debug": false
+}

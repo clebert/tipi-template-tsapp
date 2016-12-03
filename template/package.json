@@ -1,0 +1,56 @@
+{
+  "private": true,
+  "name": "${name}",
+  "version": "0.0.0",
+  "description": "${description}",
+  "license": "MIT",
+  "author": "${author} <${email}>",
+  "repository": {
+    "url": "https://github.com/${user}/${name}.git",
+    "type": "git"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.js"
+    }
+  },
+  "scripts": {
+    "commitmsg": "conventional-changelog-lint -e",
+    "prepush": "npm run ci",
+    "prebundle": "npm run compile && mkdirp docs/scripts && rimraf paeckchen.cache.json",
+    "bundle": "paeckchen",
+    "preci": "npm prune && npm install",
+    "ci": "npm run lint && tsfmt --verify && npm test",
+    "precompile": "rimraf dist",
+    "compile": "tsc --project .",
+    "cz": "git-cz",
+    "format": "tsfmt --replace",
+    "lint": "tslint -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.{ts,tsx}' 'types/**/*.d.ts'",
+    "prestart": "npm run compile",
+    "start": "http-server -o -p 1985 ./docs",
+    "pretest": "npm run compile",
+    "test": "echo 'no tests found'",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:compile": "npm run compile -- --watch",
+    "watch:bundle": "npm run bundle -- --watch"
+  },
+  "devDependencies": {
+    "commitizen": "2.8.6",
+    "conventional-changelog-lint": "1.1.0",
+    "custom-tslint-formatters": "2.0.0",
+    "cz-customizable": "4.0.0",
+    "http-server": "0.9.0",
+    "husky": "0.11.9",
+    "mkdirp": "0.5.1",
+    "npm-run-all": "3.1.2",
+    "paeckchen-cli": "0.4.0",
+    "rimraf": "2.5.4",
+    "ts-config": "0.3.0",
+    "tslint": "4.0.2",
+    "typescript": "2.1.1",
+    "typescript-formatter": "4.0.1"
+  }
+}
